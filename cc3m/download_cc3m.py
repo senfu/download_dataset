@@ -40,7 +40,7 @@ def process_single_tsv(tsv_file):
 
 
 if __name__ == "__main__":
-    tsv_files = os.listdir("tsv")
+    tsv_files = sorted(os.listdir("tsv"))
     os.makedirs("images", exist_ok=True)
     os.makedirs("status", exist_ok=True)
     failed_urls = process_map(process_single_tsv, tsv_files, max_workers=2, chunksize=1)
