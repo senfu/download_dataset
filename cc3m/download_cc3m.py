@@ -33,7 +33,7 @@ def process_single_tsv(tsv_file):
             zf.write("images/" + filename, filename)
             os.remove("images/" + filename)
     tqdm.write(f"Finished {tsv_file}")
-    os.system(f"scp {zip_file} {TARGET_FOLDER}")
+    os.system(f"scp {zip_file} {TARGET_FOLDER} > /dev/null 2>&1")
     os.remove(zip_file)
     with open("status/" + zip_file + ".json", "w") as f:
         json.dump(failed_url, f)
