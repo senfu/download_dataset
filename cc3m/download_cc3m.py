@@ -10,6 +10,7 @@ TARGET_FOLDER = "junyan_cci01:/gpfs/u/home/LMCG/LMCGljnn/scratch/datasets/raw/cc
 
 
 def process_single_tsv(tsv_file):
+    tqdm.write(f"Processing {tsv_file}...")
     failed_url = []
     index = int(tsv_file.split(".")[-1])
     zip_file = f"images_{index}.zip"
