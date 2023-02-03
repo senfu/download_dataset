@@ -13,6 +13,7 @@ def process_single_tsv(tsv_file):
     failed_url = []
     index = int(tsv_file.split(".")[-1])
     zip_file = f"images_{index}.zip"
+    success_num = 0
     if os.path.exists(zip_file):
         return
     with zipfile.ZipFile(zip_file, "w") as zf:
@@ -26,13 +27,14 @@ def process_single_tsv(tsv_file):
                 continue
             try:
                 urllib.request.urlretrieve(url, "images/" + filename)
+                success_num += 1
             except:
                 failed_url.append(url)
                 # tqdm.write(f"Failed to download {url}")
                 continue
             zf.write("images/" + filename, filename)
             os.remove("images/" + filename)
-    tqdm.write(f"Finished {tsv_file}")
+    tqdm.write(f"Finished {tsv_file}. {success_num} images downloaded.")
     os.system(f"scp {zip_file} {TARGET_FOLDER} > /dev/null 2>&1")
     os.remove(zip_file)
     with open("status/" + zip_file + ".json", "w") as f:
