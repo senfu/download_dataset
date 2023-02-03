@@ -43,6 +43,9 @@ if __name__ == "__main__":
     tsv_files = sorted(os.listdir("tsv"))
     os.makedirs("images", exist_ok=True)
     os.makedirs("status", exist_ok=True)
-    failed_urls = process_map(process_single_tsv, tsv_files, max_workers=2, chunksize=1)
+    failed_urls = process_map(
+        process_single_tsv, tsv_files,
+        max_workers=8, chunksize=1,
+    )
     with open("failed_urls.json", "w") as f:
         json.dump(failed_urls, f)
