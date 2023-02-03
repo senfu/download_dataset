@@ -43,7 +43,7 @@ def process_single_tsv(tsv_file):
 
 
 if __name__ == "__main__":
-    tsv_files = sorted(os.listdir("tsv"))
+    tsv_files = sorted(os.listdir("tsv"), key=lambda x: int(x.split(".")[-1]))
     os.makedirs("images", exist_ok=True)
     os.makedirs("status", exist_ok=True)
     failed_urls = process_map(
